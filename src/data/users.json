@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "username": "ksouihi",
+        "role": "opérateur",
+        "status": "active",
+        "password": "123456"
+    },
+    {
+        "id": 2,
+        "username": "tserandour",
+        "role": "admin",
+        "status": "active",
+        "password": "123456"
+    },
+    {
+        "id": 3,
+        "username": "ahadad",
+        "role": "téchnicien",
+        "status": "active",
+        "password": "123456"
+    }
+]
