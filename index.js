@@ -3,6 +3,10 @@ const cors = require("cors");
 const initUserRoutes = require("./routes/user.routes");
 const initProductRoutes = require("./routes/product.routes");
 const initInterventionRoutes = require("./routes/intervention.routes");
+const initFamilleRoutes = require("./routes/famille.routes");
+const initSubfamilleRoutes = require("./routes/subfamille.routes");
+
+
 
 const app = express();
 
@@ -18,7 +22,7 @@ db.sequelize.sync()
 
 var corsOptions = {
     origin: "*"
-};
+}; 
 
 app.use(cors(corsOptions));
 
@@ -45,6 +49,11 @@ app.use(function(req, res, next) {
 initUserRoutes(app);
 initProductRoutes(app);
 initInterventionRoutes(app);
+initFamilleRoutes(app);
+initSubfamilleRoutes(app);
+
+
+
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

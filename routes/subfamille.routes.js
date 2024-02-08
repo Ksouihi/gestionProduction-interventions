@@ -3,11 +3,9 @@ const controller = require("../controllers/subfamille.controller");
 module.exports = function(app) {
     app.post(
         "/api/famille/add",
-        controller.createfamille
+        controller.createSub_family
     );
 
-    app.get("/api/famille", controller.getAddSubFamly)
-   app.get("/api/famille/:id", controller.getSub_family)
-   app.post("/api/famille/:id", controller.updateSub_family)
-
+    app.get("/api/famille/add/:id", controller.getAddSub_familyList)
+   app.get("/api/famille/add/:id", controller.getAddSub_familyById)
 };
