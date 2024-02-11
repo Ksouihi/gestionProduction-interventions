@@ -19,8 +19,8 @@ exports.createSub_family = (req, res) => {
 
 exports.getAddSub_familyList = async (req, res) => {
     try {
-        const addSub_familyList = await AddSub_family.findAll({ include: [SubFamily, Family] });
-        res.send({ addSub_familyList });
+        const addSub_familyList = await AddSub_family.findAll();
+        res.send(addSub_familyList);
     } catch (err) {
         res.status(500).send({ message: err.message });
     }
@@ -34,4 +34,5 @@ exports.getAddSub_familyById = async (req, res) => {
         res.status(500).send({ message: err.message });
     }
 };
+
 

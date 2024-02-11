@@ -5,7 +5,8 @@ const initProductRoutes = require("./routes/product.routes");
 const initInterventionRoutes = require("./routes/intervention.routes");
 const initFamilleRoutes = require("./routes/famille.routes");
 const initSubfamilleRoutes = require("./routes/subfamille.routes");
-
+const initlineRoutes =  require("./routes/line.routes");
+const initStatsRoute=require("./routes/stats.routes");
 
 
 const app = express();
@@ -51,6 +52,8 @@ initProductRoutes(app);
 initInterventionRoutes(app);
 initFamilleRoutes(app);
 initSubfamilleRoutes(app);
+initlineRoutes(app);
+initStatsRoute(app)
 
 
 
@@ -59,3 +62,4 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
+

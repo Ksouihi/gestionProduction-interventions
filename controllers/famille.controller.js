@@ -29,11 +29,12 @@ exports.createFamily = (req, res) => {
     });
     
     };
+    
 //ajout une contrainte si famille déja exixte 
 
 exports.getFamilies = async (req, res) => {  
   const familles = await Family.findAll();
-    res.send({familles})
+    res.send(familles)
 };
 exports.updateFamilies = async (req, res) => {
   try {

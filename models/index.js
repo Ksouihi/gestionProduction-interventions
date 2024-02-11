@@ -30,6 +30,9 @@ db.subFamily = require("../models/subFamily.model")(sequelize, Sequelize);
 db.line = require("../models/line.model")(sequelize, Sequelize);
 db.intervention = require("../models/intervention.model")(sequelize, Sequelize);
 db.typeIntervention = require("../models/typeIntervention.model")(sequelize, Sequelize);
+db.vision_synchro = require("../models/vision_synchro.model")(sequelize,Sequelize);
+db.vision_sanction = require("../models/vision_sanction.model.js")(sequelize,Sequelize);
+db.have=require("../models/have.model.js")(sequelize,Sequelize);
 
 db.user.belongsTo(db.userRole, { foreignKey: 'role_id' });
 db.userRole.hasMany(db.user, { foreignKey: 'role_id' });
@@ -40,7 +43,6 @@ db.family.hasMany(db.subFamily, { foreignKey: 'id_family' });
 
 db.product.belongsTo(db.family, { foreignKey: 'id_family' });
 db.family.hasMany(db.product, { foreignKey: 'id_family' });
-
 db.product.belongsTo(db.subFamily, { foreignKey: 'id_sub_family' });
 db.subFamily.hasMany(db.product, { foreignKey: 'id_sub_family' });
 
@@ -52,5 +54,11 @@ db.line.hasMany(db.intervention, { foreignKey: 'id_line' });
 
 db.intervention.belongsTo(db.typeIntervention, { foreignKey: 'id_type_intervention' });
 db.typeIntervention.hasMany(db.intervention, { foreignKey: 'id_type_intervention' });
+
+
+
+//db.product.belongsTo(db.have, { foreignKey: 'id_'});
+db.have.belongsTo(db.product, { foreignKey:'id_fpy_trg'});
+db.product.hasMany(db.have, { foreignKey:'id_fpy_trg'});
 
 module.exports = db;

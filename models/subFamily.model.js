@@ -11,3 +11,5 @@ module.exports = (sequelize, Sequelize) => {
 
     return Sub_Family;
 };
+
+
