@@ -4,8 +4,13 @@ import AddUser from '../pages/Users/AddUser';
 import UpdateUser from '../pages/Users/UpdateUser';
 import Products from '../pages/Products/Products';
 import AddProduct from '../pages/Products/AddProduct';
+import TableListes from '../pages/Famille/Familles';
 import AddFamly from '../pages/Famille/AddFamly';
-
+import AddSubFamly from '../pages/Famille/AddSubFamly';
+import UpdateFamilles from '../pages/Famille/UpdateFamilles';
+import AddLine from '../pages/Lines/AddLine';
+import UpdateLine from '../pages/Lines/UpdateLine';
+import Lines from '../pages/Lines/Lines';
 
 import Interventions from '../pages/Interventions/Interventions';
 import AddIntervention from '../pages/Interventions/AddIntervention';
@@ -94,11 +99,6 @@ const coreRoutes = [
     title: 'Ajouter produit',
     component: AddProduct,
   },
-  {
-    path: '/famille/',
-    title: 'Ajouter famille',
-    component: AddFamly,
-  },
 
 
   {
@@ -131,8 +131,44 @@ const coreRoutes = [
     title: 'Intervention',
     component: InterventionDetail,
   },
+  {
+    path: '/famille/familles',
+    title: 'TableListes familles',
+    component: TableListes,
+  },
+  
+  {
+    path: '/famille',
+    title: 'Ajouter famille',
+    component: AddFamly,
+  },
+  {
+    path: '/famille/add',
+    title: 'Ajouter sous famille',
+    component: AddSubFamly,
+  },
+  {
+    path: '/famille/:id',
+    title: 'Modifer famille',
+    component: UpdateFamilles,
+  },
 
+  {
+    path: '/Lines',
+    title: 'Liste des lignes',
+    component: Lines,
+  },
+  {
+    path: '/Lines/add',
+    title: 'Ajouter ligne',
+    component: AddLine,
+  },
 
+  {
+    path: '/Lines/:id',
+    title: 'Modifier ligne',
+    component: UpdateLine,
+ },
 ];
 
 const routes = [...coreRoutes];

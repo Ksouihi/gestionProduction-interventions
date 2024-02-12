@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {Product} from '../../models/Product'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+
 const TableProducts = () => {
   const [products, setProducts] = useState<Product[]>([]);
   useEffect(()=>{

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import Breadcrumb from "../../components/Breadcrumb";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Family } from "../../models/Product";
 import axios from "axios";
 
-const AddFamly = () => {
-
+const UpdateFamilles = () => {
+const {id}=useParams()
     const navigate = useNavigate();
     const [name_family, setname_family] = useState<string>('');
     const [error, setError] = useState<string>('');
@@ -20,7 +20,7 @@ const AddFamly = () => {
             name_family,
             id: Date.now()
         }
-        axios.post('http://localhost:8080/api/famille', {
+        axios.put('http://localhost:8080/api/famille/'+id, {
           ...newFamily
         }).then((res)=>{
           if(res.status === 200) {
@@ -30,10 +30,21 @@ const AddFamly = () => {
           setError(err.response.data.message)
         })
     }
+    useEffect(()=>{
+axios.get('http://localhost:8080/api/famille/'+id).then((res)=>{
+    if (res.data && res.data.family ){
+        setname_family(res.data.family.name_family)
+    }
+})
+
+
+
+    },[]) 
+ 
     
     return (
         <>
-        <Breadcrumb pageName="Ajouter famille" />
+        <Breadcrumb pageName="Modifier famille" />
         <div className="grid grid-cols-1 gap-9 sm:grid-cols-2">
           <div className="flex flex-col gap-9">
             <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
@@ -57,12 +68,15 @@ const AddFamly = () => {
                         setError('')
                     }}
                   />
-                </div>                              
-            </div>
+                </div>             
+                      
+             
+                
+              </div>
             </div>
             <p className="text-danger">{error}</p>
            <div className="flex justify-center py-4">
-            <button className="inline-flex items-center justify-center rounded bg-primary py-4 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10" onClick={AddFamly}>Ajouter famille</button>
+            <button className="inline-flex items-center justify-center rounded bg-primary py-4 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10" onClick={AddFamly}>Modifier famille</button>
            </div>
 
   
@@ -73,4 +87,4 @@ const AddFamly = () => {
     );
 };
 
-export default AddFamly;  
+export default UpdateFamilles;  

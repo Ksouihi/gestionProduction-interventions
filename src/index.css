@@ -161,3 +161,9 @@ span.flatpickr-weekday,
 [x-cloak] {
   display: none !important;
 }
+
+.chartLegend {
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+};

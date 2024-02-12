@@ -7,8 +7,6 @@ import axios from "axios";
 
 
 const AddProduct = () => {
-
-
     const [lines, setLines] = useState<Line[]>([]);
     const [families, setFamilies] = useState<Family[]>([]);
     const [allSubFamilies, setAllSubFamilies] = useState<SubFamily[]>([]);
@@ -24,6 +22,7 @@ const AddProduct = () => {
     const [cadence, setcadence] = useState<number|undefined>(undefined);
     const [line, setLine] = useState<Line|undefined>(undefined);
     const [error, setError] = useState<string>('');
+    const [errorProductName, setErrorProductName] = useState<string>('');
 
     const addProduct = () => {
         if(!objective_fpy || !objective_trg || !item_code || !face || !name_prog || !family !|| !sub_family || !cadence || !line) {
@@ -54,6 +53,19 @@ const AddProduct = () => {
         })
 
         
+    }
+
+    const getProductVision = (productName: string) => {
+      if(productName.length >3) {
+        setErrorProductName('');
+        axios.get('http://localhost:8080/api/vision_synchro/'+productName).then((res)=> {
+          setface(res.data.productVision.face ?? '')
+        }).catch((err) => {
+          setErrorProductName('le produit n\'existe pas')
+        });
+      }else {
+        setErrorProductName('le produit n\'existe pas')
+      }
     }
 
     useEffect(()=> {
@@ -88,6 +100,23 @@ const AddProduct = () => {
                 </h3>
               </div>
               <div className="flex flex-col gap-5.5 p-6.5">
+              <div>
+                  <label className="mb-3 block text-black dark:text-white">
+                    Nom de programme *
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Nom de programme"
+                    className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    value={name_prog}
+                    onChange={(e) => {
+                        setname_prog(e.target.value)
+                        getProductVision(e.target.value)
+                        setError('')
+                    }}
+                  />
+                  <small className="text-red-500">{errorProductName}</small>
+                </div>
                 <div>
                   <label className="mb-3 block text-black dark:text-white">
                     Réference *
@@ -216,11 +245,6 @@ const AddProduct = () => {
                         value={line?.id}
                         onChange={(e) => {
                             setLine(lines.find(l=>l.id === Number(e.target.value)))
-                            // const selectedFamily = families.find(f => f.name === e.target.value)
-                            // if(selectedFamily) {
-                            //     setSubFamilies(selectedFamily.subFamilies);
-                            //     setsubFamily(selectedFamily.subFamilies[0]);
-                            // }
                             setError('')
                         }}
                     >
@@ -276,21 +300,7 @@ const AddProduct = () => {
                     }}
                   />
                 </div>
-                <div>
-                  <label className="mb-3 block text-black dark:text-white">
-                    Nom de programme *
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Nom de programme"
-                    className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    value={name_prog}
-                    onChange={(e) => {
-                        setname_prog(e.target.value)
-                        setError('')
-                    }}
-                  />
-                </div>
+                
 
               </div>
             </div>

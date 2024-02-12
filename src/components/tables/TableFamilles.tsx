@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Famille } from '../../models/Famille';
+import {Family} from '../../models/Product'
+
 const TableFamilles = () => {
-    const [familles, setFamilles] = useState<Famille[]>([]);
+  const [familles, setFamilles] = useState<Family[]>([]);
     useEffect(() => {
       axios.get('http://localhost:8080/api/famille').then((res) => {
-        if (res.data && res.data.familles) {
           setFamilles(res.data.familles); 
         }
-      })
+      )
     },[])
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
@@ -20,13 +20,13 @@ const TableFamilles = () => {
           
           <div className="p-2.5 xl:p-5">
             <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Nom de famille
+              Nom de Family
             </h5>
           </div>
                 
                  
         </div>
-        {familles.map(famille => <FamilleRow key={famille.id} {...famille} />)}
+        {familles.map(famille => <FamilyRow key={famille.id} {...famille} />)}
       </div>
     </div>
   );
@@ -34,14 +34,14 @@ const TableFamilles = () => {
 
 export default TableFamilles;
 
-const FamilleRow = ({id,name_family } : Famille) => {
+const FamilyRow = ({id,name_family } : Family) => {
     return (
         <div className="grid grid-cols-3 border-b border-stroke dark:border-strokedark sm:grid-cols-6">
           <div className="flex items-center gap-3 p-2.5 xl:p-5">
             <p className="hidden text-black dark:text-white sm:block">{name_family}</p>
           </div>
           <div className='flex items-center justify-center gap-2'>
-            <Link to={`/famille/${id}`} className='text-white bg-meta-3 px-4 py-2 rounded'>modifier</Link>
+            <Link to={`/famille${id}`} className='text-white bg-meta-3 px-4 py-2 rounded'>modifier</Link>
           </div>
         </div>
     )
